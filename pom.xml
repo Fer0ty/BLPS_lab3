@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.artemiyandarina</groupId>
-    <artifactId>BLPS_lab2</artifactId>
+    <artifactId>BLPS_lab3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BLPS_lab2</name>
-    <description>BLPS_lab2</description>
+    <name>BLPS_lab3</name>
+    <description>BLPS_lab3</description>
     <properties>
         <java.version>17</java.version>
     </properties>
