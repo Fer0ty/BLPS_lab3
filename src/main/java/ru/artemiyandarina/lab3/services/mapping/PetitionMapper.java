@@ -6,6 +6,7 @@ import ru.artemiyandarina.lab3.models.Country;
 import ru.artemiyandarina.lab3.models.Petition;
 import ru.artemiyandarina.lab3.schemas.petition.PetitionBase;
 import ru.artemiyandarina.lab3.schemas.petition.PetitionCreate;
+import ru.artemiyandarina.lab3.schemas.petition.PetitionNotification;
 import ru.artemiyandarina.lab3.schemas.petition.PetitionRead;
 
 @Service
@@ -37,6 +38,13 @@ public class PetitionMapper {
         return newPetition;
     }
 
+    public PetitionNotification mapPetitionToPetitionNotificaton(Petition petition){
+        PetitionNotification petitionNotification = new PetitionNotification();
+        petitionNotification.setId(petition.getId());
+        petitionNotification.setOwnerId(petition.getOwner().getId());
+        petitionNotification.setApproveStatus(petition.getApproveStatus());
+        return petitionNotification;
+    }
     public PetitionRead mapEntityToPetitionRead(Petition entity) {
         PetitionRead schema = new PetitionRead();
         schema.setId(entity.getId());

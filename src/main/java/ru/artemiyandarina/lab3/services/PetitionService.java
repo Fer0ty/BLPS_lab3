@@ -6,7 +6,6 @@ import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import ru.artemiyandarina.lab3.exceptions.NotFoundException;
 import ru.artemiyandarina.lab3.exceptions.PermissionDeniedException;
 import ru.artemiyandarina.lab3.models.ApproveStatus;
@@ -17,7 +16,12 @@ import ru.artemiyandarina.lab3.schemas.petition.PetitionCreate;
 import ru.artemiyandarina.lab3.schemas.petition.PetitionRead;
 import ru.artemiyandarina.lab3.services.mapping.PetitionMapper;
 
-import javax.transaction.*;
+
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,17 +30,18 @@ public class PetitionService {
     final PetitionRepository petitionRepository;
     final PetitionMapper petitionMapper;
     final SecurityService securityService;
-    final PlatformTransactionManager transactionManager;
+
+    final NotificationService notificationService;
+
 
     @Autowired
-    public PetitionService(PetitionRepository petitionRepository, PetitionMapper petitionMapper, SecurityService securityService, PlatformTransactionManager transactionManager) {
+    public PetitionService(PetitionRepository petitionRepository, PetitionMapper petitionMapper, SecurityService securityService, NotificationService notificationService) {
         this.petitionRepository = petitionRepository;
         this.petitionMapper = petitionMapper;
         this.securityService = securityService;
-        this.transactionManager = transactionManager;
+        this.notificationService = notificationService;
     }
-
-    //  todo: Вывод петиции, у которой статус CONFIRMED
+    
     public Set<PetitionRead> getConfirmed() {
         return petitionRepository.findAll()
                 .stream().filter(petition -> petition.getApproveStatus().equals(ApproveStatus.CONFIRMED.toString()))
@@ -108,6 +113,9 @@ public class PetitionService {
             existingPetition.setApproveStatus(newStatus.toString());
             Petition savedPetition = petitionRepository.save(existingPetition);
             btm.commit();
+            // Отправка объекта в ActiveMQ
+
+            notificationService.sendPetitionNotification(petitionMapper.mapPetitionToPetitionNotificaton(existingPetition));
             return petitionMapper.mapEntityToPetitionRead(savedPetition);
         } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
                  SystemException e) {
