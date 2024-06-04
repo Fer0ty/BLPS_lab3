@@ -11,7 +11,7 @@ import ru.artemiyandarina.lab3.schemas.petition.PetitionNotification;
 
 @Service
 @Slf4j
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class NotificationService {
     @Autowired
     JmsTemplate jmsTemplate;

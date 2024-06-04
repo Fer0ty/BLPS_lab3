@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class UserService {
     final UserRepository userRepository;
     final UserMapper userMapper;

@@ -12,7 +12,7 @@ import ru.artemiyandarina.lab3.repositories.UserRepository;
 
 @Service
 @RequiredArgsConstructor
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class SecurityService {
     final UserRepository userRepository;
 

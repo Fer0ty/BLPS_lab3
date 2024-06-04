@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
-@Profile("main")
+@Profile({"devMain","heliosMain"})
 public class JAASConfig {
     private final UserRepository userRepository;
 

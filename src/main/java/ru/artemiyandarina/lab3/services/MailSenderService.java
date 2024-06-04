@@ -14,7 +14,7 @@ import ru.artemiyandarina.lab3.schemas.petition.PetitionNotification;
 @Slf4j
 @Component
 @AllArgsConstructor
-@Profile("notification")
+@Profile({"devNotification","heliosNotification"})
 public class MailSenderService {
     UserRepository userRepository;
     MailService mailService;

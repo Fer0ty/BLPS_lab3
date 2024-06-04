@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @RequiredArgsConstructor
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class JAASAuthorityGranter implements AuthorityGranter {
 
     private final UserRepository userRepository;

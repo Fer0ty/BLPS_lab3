@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@Profile("main")
+@Profile({"devMain","heliosMain"})
 public class PetitionService {
     final PetitionRepository petitionRepository;
     final PetitionMapper petitionMapper;

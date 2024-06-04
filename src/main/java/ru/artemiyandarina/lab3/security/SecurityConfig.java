@@ -17,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class SecurityConfig {
     private final AbstractJaasAuthenticationProvider jaasAuthenticationProvider;
 

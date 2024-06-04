@@ -23,7 +23,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/petition")
 @Validated
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 public class PetitionController {
     private final PetitionService petitionService;
 

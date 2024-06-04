@@ -16,15 +16,13 @@ import ru.artemiyandarina.lab3.exceptions.PermissionDeniedException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Profile("main")
+@Profile({"devMain", "heliosMain"})
 @ControllerAdvice
 public class ErrorHandlingControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class,
-            jakarta.validation.ConstraintViolationException.class})
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class, jakarta.validation.ConstraintViolationException.class})
+    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
@@ -37,8 +35,7 @@ public class ErrorHandlingControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(value = {DataIntegrityViolationException.class})
-    public Map<String, String> handleUniqueExceptions(
-            DataIntegrityViolationException ex) {
+    public Map<String, String> handleUniqueExceptions(DataIntegrityViolationException ex) {
         String constraintName = "Неизвестная ошибка DataIntegrityViolationException";
         if ((ex.getCause() != null) && (ex.getCause() instanceof ConstraintViolationException)) {
             constraintName = ex.getCause().getCause().getMessage();

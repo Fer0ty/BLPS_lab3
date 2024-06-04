@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 @Validated
-@Profile("main")
+@Profile({"devMain","heliosMain"})
 
 public class UserController {
     final UserService userService;
