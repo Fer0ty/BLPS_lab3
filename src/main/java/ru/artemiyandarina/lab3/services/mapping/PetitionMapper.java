@@ -34,11 +34,10 @@ public class PetitionMapper {
         } catch (IllegalArgumentException e) {
             throw new UnknownCountryException();
         }
-        // todo: почему blya страна не сетится.....
         return newPetition;
     }
 
-    public PetitionNotification mapPetitionToPetitionNotificaton(Petition petition){
+    public PetitionNotification mapPetitionToPetitionNotification(Petition petition){
         PetitionNotification petitionNotification = new PetitionNotification();
         petitionNotification.setId(petition.getId());
         petitionNotification.setOwnerId(petition.getOwner().getId());

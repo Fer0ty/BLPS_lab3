@@ -2,6 +2,7 @@ package ru.artemiyandarina.lab3.services;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ru.artemiyandarina.lab3.exceptions.NotFoundException;
 import ru.artemiyandarina.lab3.models.User;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Profile("main")
 public class UserService {
     final UserRepository userRepository;
     final UserMapper userMapper;

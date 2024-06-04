@@ -4,6 +4,7 @@ import bitronix.tm.BitronixTransactionManager;
 import bitronix.tm.TransactionManagerServices;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import ru.artemiyandarina.lab3.exceptions.NotFoundException;
@@ -26,6 +27,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@Profile("main")
 public class PetitionService {
     final PetitionRepository petitionRepository;
     final PetitionMapper petitionMapper;
@@ -113,9 +115,9 @@ public class PetitionService {
             existingPetition.setApproveStatus(newStatus.toString());
             Petition savedPetition = petitionRepository.save(existingPetition);
             btm.commit();
-            // Отправка объекта в ActiveMQ
 
-            notificationService.sendPetitionNotification(petitionMapper.mapPetitionToPetitionNotificaton(existingPetition));
+            // Отправка объекта в ActiveMQ
+            notificationService.sendPetitionNotification(petitionMapper.mapPetitionToPetitionNotification(existingPetition));
             return petitionMapper.mapEntityToPetitionRead(savedPetition);
         } catch (HeuristicRollbackException | RollbackException | NotSupportedException | HeuristicMixedException |
                  SystemException e) {

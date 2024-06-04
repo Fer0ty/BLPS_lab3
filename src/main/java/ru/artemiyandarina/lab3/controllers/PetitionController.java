@@ -4,6 +4,7 @@ package ru.artemiyandarina.lab3.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/petition")
 @Validated
+@Profile("main")
 public class PetitionController {
     private final PetitionService petitionService;
 
@@ -85,7 +87,7 @@ public class PetitionController {
     @PutMapping("/{id}/status")
     public PetitionRead updatePetitionStatus(@PathVariable Long id,
                                              @RequestParam ApproveStatus newStatus) {
-        PetitionRead updatedPetition = null;
+        PetitionRead updatedPetition;
         try {
             updatedPetition = petitionService.updateStatus(id, newStatus);
         } catch (SystemException e) {

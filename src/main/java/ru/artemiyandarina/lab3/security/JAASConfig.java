@@ -3,6 +3,7 @@ package ru.artemiyandarina.lab3.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.jaas.AbstractJaasAuthenticationProvider;
 import org.springframework.security.authentication.jaas.AuthorityGranter;
 import org.springframework.security.authentication.jaas.DefaultJaasAuthenticationProvider;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @Configuration
 @RequiredArgsConstructor
+@Profile("main")
 public class JAASConfig {
     private final UserRepository userRepository;
 

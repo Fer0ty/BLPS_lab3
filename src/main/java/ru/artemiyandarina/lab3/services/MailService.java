@@ -2,6 +2,7 @@ package ru.artemiyandarina.lab3.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import ru.artemiyandarina.lab3.models.User;
 @Slf4j
 @Service
 @AllArgsConstructor
+@Profile("notification")
 public class MailService {
     private final JavaMailSender emailSender;
 

@@ -1,6 +1,7 @@
 package ru.artemiyandarina.lab3.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.jaas.AuthorityGranter;
 import ru.artemiyandarina.lab3.exceptions.NotFoundException;
 import ru.artemiyandarina.lab3.models.User;
@@ -11,6 +12,7 @@ import java.util.Collections;
 import java.util.Set;
 
 @RequiredArgsConstructor
+@Profile("main")
 public class JAASAuthorityGranter implements AuthorityGranter {
 
     private final UserRepository userRepository;
