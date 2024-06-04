@@ -19,14 +19,14 @@ public class MailService {
     public void sendSimpleEmail(User user, String title, String message) {
         if (!mailProperties.getDisable()) {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-            simpleMailMessage.setFrom("");
+            simpleMailMessage.setFrom("blpslab3artemiyandarinav2@gmail.com");
             simpleMailMessage.setTo(user.getEmail());
             simpleMailMessage.setSubject(title);
             simpleMailMessage.setText(message);
             emailSender.send(simpleMailMessage);
         }
         if (mailProperties.getLog()) {
-            log.info("Отпрвлен email: \n\tTo: {}\n\tSubject: {}\n\tBody: {}", user.getEmail(), title, message);
+            log.info("Отправлен email: \n\tTo: {}\n\tSubject: {}\n\tBody: {}", user.getEmail(), title, message);
         }
     }
     public void sendSimpleEmail (String title, String message) {
@@ -39,7 +39,7 @@ public class MailService {
             emailSender.send(simpleMailMessage);
         }
         if (mailProperties.getLog()) {
-            log.info("Отпрвлен email: \n\tTo: {}\n\tSubject: {}\n\tBody: {}", "testemail", title, message);
+            log.info("Отправлен email: \n\tTo: {}\n\tSubject: {}\n\tBody: {}", "testemail", title, message);
         }
     }
 }

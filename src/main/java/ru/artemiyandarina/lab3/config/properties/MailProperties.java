@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @ConfigurationProperties(prefix = "application.mail")
 public class MailProperties {
     // Выводит в консоль текст сообщения
-    private Boolean log = false;
+    private Boolean log = true;
     // Отключает отправку сообщения
     private Boolean disable = false;
 }
